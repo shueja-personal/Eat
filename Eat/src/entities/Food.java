@@ -11,10 +11,15 @@ public class Food extends GameObject {
 	int speed= 3;
 	double angle;
 	Color foodColor = Color.GREEN;
+	public Player ownPlayer;
 
-	public Food(int x, int y, int width, int height, double angle) {
+	public Food(int x, int y, int width, int height, double angle, Player ownPlayer) {
 		super(x, y, width, height);
 		this.angle = angle;
+		this.ownPlayer = ownPlayer;
+		
+		foodColor = ownPlayer.playerColor;
+		
 		//collisionBox = new Rectangle(x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}

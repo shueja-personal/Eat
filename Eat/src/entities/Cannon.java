@@ -19,16 +19,18 @@ public class Cannon extends GameObject {
 	public double rotation;
 	public double CWbound;
 	public double CCWbound;
+	public Player ownPlayer;
 
 	int rotateDirection = 1;
 	//public boolean isCWdirection = true;
 	public double degPerFrame=0.5;
 	public AffineTransform rotate = new AffineTransform(); 
-	public Cannon(int x, int y, int width, int height, double CW, double CCW) {
+	public Cannon(int x, int y, int width, int height, double CW, double CCW, Player ownPlayer) {
 		super(x, y, width, height);
 		CWbound=CW %360;
 		CCWbound=CCW % 360;
 		rotation = CWbound;
+		this.ownPlayer = ownPlayer;
 		//rotation = (CWbound+CCWbound)/2;
 		// TODO Auto-generated constructor stub
 	}
@@ -73,6 +75,6 @@ public class Cannon extends GameObject {
     }
 	
 	public void shoot(ObjectManager manager) {
-		manager.addFood(x, y, rotation);
+		manager.addFood(x, y, rotation, ownPlayer);
 	}
 }

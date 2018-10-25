@@ -27,6 +27,8 @@ public class ObjectManager {
 	int foodToSpew= 0;
 	public boolean gameOver;
 	Player spewingPlayer;
+	Player hitPlayer;
+	Player winningPlayer;
 	
 	public ObjectManager(Player p1, Player p2, Cannon cannonTL, Cannon cannonTR, Cannon cannonBL, Cannon cannonBR, Base p1Base, Base p2Base) {
 		this.p1 = p1;
@@ -42,6 +44,7 @@ public class ObjectManager {
 		PlayerList.add(p2);
 		BaseList.add(p1Base);
 		BaseList.add(p2Base);
+		winningPlayer = p1;
 	}
 	
 	public void update() {
@@ -53,9 +56,9 @@ public class ObjectManager {
 			player.update();
 			for (Food food : FoodList ) {
 				food.update();
-				if (food.collisionBox.intersects(player.collisionBox) && food.getAge() > 1000) {
+				if (food.collisionBox.intersects(food.ownPlayer.collisionBox) && food.getAge() > 1000) {
 					food.isAlive=false;
-					player.heldFood++;
+					food.ownPlayer.heldFood++;
 					//System.out.println(player + " has " + player.heldFood + " food ");
 				}
 				
@@ -64,13 +67,19 @@ public class ObjectManager {
 				if(player.collisionBox.intersects(hitPlayer.collisionBox)) {
 					if(player.heldFood > hitPlayer.heldFood) { // player has more loses food.
 						spewingPlayer = player;
+						this.hitPlayer = hitPlayer;
 						foodToSpew = player.heldFood-hitPlayer.heldFood; //Average of scores minus lesser score = 
 						player.heldFood -= foodToSpew;
+						
 					}
 				}
 				else {
 					spewingPlayer =null;
+					this.hitPlayer = null;
 				}
+			}
+			if (player.ownBase.deliveredFood > winningPlayer.ownBase.deliveredFood) {
+				winningPlayer = player;
 			}
 
 		}
@@ -83,16 +92,22 @@ public class ObjectManager {
 				}
 				if (base.deliveredFood >= 1000) {
 					gameOver=true;
+					winningPlayer = base.ownPlayer;
 				}
+				if (base.ownPlayer == spewingPlayer) {
+					spewingPlayer.x = (int) base.collisionBox.getCenterX();
+					spewingPlayer.y = (int) base.collisionBox.getCenterY();
+				}
+				
 			}
 		
 		for (Cannon cannon: CannonList) {
 			cannon.update();
 			
 		}
-		if (spewingPlayer != null) {
+		if (spewingPlayer != null && hitPlayer != null) {
 			for (int i = 0; i < foodToSpew; i++) {
-				addFood(spewingPlayer.x, spewingPlayer.y, (double) random.nextInt(360));
+				addFood(spewingPlayer.x, spewingPlayer.y, (double) random.nextInt(360), hitPlayer);
 			}
 			foodToSpew = 0;
 			spewingPlayer = null;
@@ -118,8 +133,8 @@ public class ObjectManager {
 			cannon.shoot(manager);
 		}
 	}
-	public void addFood(int x, int y, double angle) {
-		FoodList.add(new Food(x, y, foodDiameter, foodDiameter, angle));
+	public void addFood(int x, int y, double angle, Player ownPlayer) {
+		FoodList.add(new Food(x, y, foodDiameter, foodDiameter, angle, ownPlayer));
 	}
 	
 	public void purgeObjects() {

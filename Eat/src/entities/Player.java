@@ -18,6 +18,7 @@ public class Player extends GameObject {
 	public int diameter;
 	public Font scoreFont = new Font("Arial", Font.PLAIN, 48);
 	public Color playerColor;
+	public Base ownBase;
 	
 
 	public Player(int x, int y, int width, int height, Color color) {

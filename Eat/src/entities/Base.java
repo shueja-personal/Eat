@@ -13,11 +13,12 @@ public class Base extends GameObject {
 	public Player ownPlayer;
 	public Rectangle collisionBox;
 	public Font scoreFont = new Font("Arial", Font.PLAIN, 48);
+	
 	public Base(int x, int y, int width, int height, Player ownPlayer) {
 		super(x, y, width, height);
 		this.ownPlayer = ownPlayer;
 		collisionBox = new Rectangle(/*x + ownPlayer.width, y + ownPlayer.height, width - (2* ownPlayer.width), height - (2* ownPlayer.height)*/x, y, width, height);
-		// TODO Auto-generated constructor stub
+		ownPlayer.ownBase = this;
 	}
 	
 	public void update(){
