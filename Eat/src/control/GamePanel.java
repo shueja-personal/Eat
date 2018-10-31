@@ -22,6 +22,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import entities.Base;
 import entities.Cannon;
 import entities.Player;
+import jdk.nashorn.internal.scripts.JO;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
@@ -39,6 +40,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public Random random = new Random();
 	public static Rectangle arenaNavMesh;
 	public ObjectManager manager;
+	public static int maxScore=1000;
+	public static int useCollisions = 0;
 	
 	final int MENU_STATE = 0;
 
@@ -64,6 +67,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		subtitleFont = new Font("Arial", Font.PLAIN, 24);
 		manager = new ObjectManager(p1, p2, cannonTL, cannonTR, cannonBL, cannonBR, b1, b2);
 		arenaNavMesh = new Rectangle(50, 50, Eat.WIDTH-100, Eat.HEIGHT-100);
+		try {
+			maxScore = Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", 1000));
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Invalid input. Initializing to 1000...");
+			maxScore = 1000;
+		}
+		useCollisions = JOptionPane.showConfirmDialog(null, "Use PlayerVPlayer Collisions?", "Use Collisions?", 0);
+
+		
 	}
 	
 	public void startGame() {
@@ -147,6 +159,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			JOptionPane.showMessageDialog(null, "The Red player uses WASD and eats red food\n The Blue player uses arrow keys and eats blue food.\n Deliver food to your base by going inside it.\n You have to be all the way out of your base to eat food. \n First to deliver 1000 food wins!");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_0) {
+			if (useCollisions == 1) {
+				useCollisions = 0;
+			}
+			else if (useCollisions == 0) {
+				useCollisions = 1;
+			}
 		}
 		
 	}

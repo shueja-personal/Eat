@@ -28,7 +28,7 @@ public class ObjectManager {
 	Random random =  new Random();
 	int foodDiameter=20;
 	int foodToSpew= 0;
-	public int pointsToWin;
+	public int pointsToWin = GamePanel.maxScore;
 	public boolean gameOver;
 	Player spewingPlayer;
 	Player hitPlayer;
@@ -70,7 +70,7 @@ public class ObjectManager {
 				
 			}
 			for( Player hitPlayer : PlayerList) {
-				if(player.collisionBox.intersects(hitPlayer.collisionBox)) {
+				if(player.collisionBox.intersects(hitPlayer.collisionBox) && GamePanel.useCollisions == 0) {
 					if(player.heldFood > hitPlayer.heldFood) { // player has more loses food.
 						spewingPlayer = player;
 						this.hitPlayer = hitPlayer;
