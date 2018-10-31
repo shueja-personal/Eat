@@ -68,7 +68,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager = new ObjectManager(p1, p2, cannonTL, cannonTR, cannonBL, cannonBR, b1, b2);
 		arenaNavMesh = new Rectangle(50, 50, Eat.WIDTH-100, Eat.HEIGHT-100);
 		try {
-			maxScore = Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", 1000));
+			maxScore = Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", 10));
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Invalid input. Initializing to 1000...");
 			maxScore = 1000;

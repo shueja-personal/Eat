@@ -35,7 +35,7 @@ public class ObjectManager {
 	Player winningPlayer;
 	
 	public ObjectManager(Player p1, Player p2, Cannon cannonTL, Cannon cannonTR, Cannon cannonBL, Cannon cannonBR, Base p1Base, Base p2Base) {
-		pointsToWin = 1000;//Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", "1000"));
+		//pointsToWin = 1000;//Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", "1000"));
 		this.p1 = p1;
 		this.p2 = p2;
 		b1 = p1Base;
