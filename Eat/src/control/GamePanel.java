@@ -146,7 +146,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			p2.speedY = -10;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			JOptionPane.showMessageDialog(null, "The Red player uses WASD and eats red food\n The Blue player uses arrow keys and eats blue food.\n Deliver food to your base by going inside it.\n First to deliver 1000 food wins!");
+			JOptionPane.showMessageDialog(null, "The Red player uses WASD and eats red food\n The Blue player uses arrow keys and eats blue food.\n Deliver food to your base by going inside it.\n You have to be all the way out of your base to eat food. \n First to deliver 1000 food wins!");
 		}
 		
 	}
@@ -188,6 +188,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateMenuState(){
 		currentState = MENU_STATE;
 		manager.gameOver = false;
+		
 	}
 	
 	public void updateGameState(){
@@ -215,6 +216,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(subtitleFont);
 		g.drawString("Press ENTER to start", 100, 500);
 		g.drawString("Press SPACE for instructions", 75, 600);
+		
 	}
 	
 	public void drawGameState(Graphics g){

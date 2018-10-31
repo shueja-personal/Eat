@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
 import control.Eat;
 
@@ -12,6 +13,7 @@ public class Food extends GameObject {
 	double angle;
 	Color foodColor = Color.GREEN;
 	public Player ownPlayer;
+	Random random = new Random();
 
 	public Food(int x, int y, int width, int height, double angle, Player ownPlayer) {
 		super(x, y, width, height);
@@ -46,10 +48,10 @@ public class Food extends GameObject {
 	}
 	
 	public void bounceX() { 
-		angle = 180+angle % 360;
+		angle = 180+angle % 360 + random.nextDouble() - 0.5;
 	}
 	
 	public void bounceY() {
-		angle = -angle;
+		angle = -angle + random.nextDouble() - 0.5;
 	}
 }

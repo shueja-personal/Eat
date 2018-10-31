@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.naming.ldap.ManageReferralControl;
+import javax.swing.JOptionPane;
+
+import com.sun.xml.internal.ws.policy.PolicyIntersector;
 
 import entities.Base;
 import entities.Cannon;
@@ -25,12 +28,14 @@ public class ObjectManager {
 	Random random =  new Random();
 	int foodDiameter=20;
 	int foodToSpew= 0;
+	public int pointsToWin;
 	public boolean gameOver;
 	Player spewingPlayer;
 	Player hitPlayer;
 	Player winningPlayer;
 	
 	public ObjectManager(Player p1, Player p2, Cannon cannonTL, Cannon cannonTR, Cannon cannonBL, Cannon cannonBR, Base p1Base, Base p2Base) {
+		pointsToWin = 1000;//Integer.parseInt(JOptionPane.showInputDialog("How many points to Win?", "1000"));
 		this.p1 = p1;
 		this.p2 = p2;
 		b1 = p1Base;
@@ -45,6 +50,7 @@ public class ObjectManager {
 		BaseList.add(p1Base);
 		BaseList.add(p2Base);
 		winningPlayer = p1;
+		
 	}
 	
 	public void update() {
@@ -56,7 +62,7 @@ public class ObjectManager {
 			player.update();
 			for (Food food : FoodList ) {
 				food.update();
-				if (food.collisionBox.intersects(food.ownPlayer.collisionBox) && food.getAge() > 1000) {
+				if (food.collisionBox.intersects(food.ownPlayer.collisionBox) && food.getAge() > 1000 && !food.ownPlayer.collisionBox.intersects(food.ownPlayer.ownBase.collisionBox)) {
 					food.isAlive=false;
 					food.ownPlayer.heldFood++;
 					//System.out.println(player + " has " + player.heldFood + " food ");
@@ -90,7 +96,7 @@ public class ObjectManager {
 						base.deliveredFood += 1;
 					}
 				}
-				if (base.deliveredFood >= 1000) {
+				if (base.deliveredFood >= pointsToWin) {
 					gameOver=true;
 					winningPlayer = base.ownPlayer;
 				}
@@ -107,7 +113,7 @@ public class ObjectManager {
 		}
 		if (spewingPlayer != null && hitPlayer != null) {
 			for (int i = 0; i < foodToSpew; i++) {
-				addFood(spewingPlayer.x, spewingPlayer.y, (double) random.nextInt(360), hitPlayer);
+				addFood(spewingPlayer.x, spewingPlayer.y, (random.nextDouble() *360), hitPlayer);
 			}
 			foodToSpew = 0;
 			spewingPlayer = null;
