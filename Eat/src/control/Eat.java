@@ -6,8 +6,8 @@ import java.awt.Window;
 import javax.swing.JFrame;
 
 public class Eat {
-	public static final int WIDTH = 1920;
-	public static final int HEIGHT = 1000;
+	public static final int WIDTH;
+	public static final int HEIGHT;
 	JFrame window;
 	GamePanel panel;
 	
@@ -24,11 +24,13 @@ public class Eat {
 	public void setup() {
 		window.add(panel);
 		window.addKeyListener(panel);
-		window.setSize(WIDTH, HEIGHT);
+		window.setSize(JFrame.FULL_SCREEN);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
         window.pack();
 		window.setVisible(true);
+		WIDTH = window.getWidth();
+		HEIGHT = window.getHeight();
 		panel.startGame();
 	}
 }
