@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import control.GamePanel;
-
 public class Base extends GameObject {
 	Color baseColor = Color.BLACK;
 	public int deliveredFood = 0;

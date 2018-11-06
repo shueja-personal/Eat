@@ -4,13 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.util.Random;
 
-import javax.naming.ldap.ManageReferralControl;
-
-import org.omg.CORBA.IRObject;
-
-import control.Eat;
 import control.ObjectManager;
 
 

@@ -1,15 +1,8 @@
 package control;
 
-import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Panel;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.naming.ldap.ManageReferralControl;
-import javax.swing.JOptionPane;
-
-import com.sun.xml.internal.ws.policy.PolicyIntersector;
 
 import entities.Base;
 import entities.Cannon;

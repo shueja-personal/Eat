@@ -1,12 +1,16 @@
 package control;
 
+import java.applet.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.Window;
 
 import javax.swing.JFrame;
 
-public class Eat {
+public class Eat extends Applet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5739980427553102257L;
 	JFrame window;
 	GamePanel panel;
 	public static int WIDTH;
