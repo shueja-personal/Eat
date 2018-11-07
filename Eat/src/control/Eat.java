@@ -1,19 +1,27 @@
 package control;
 
+import java.applet.*;
 import java.awt.Dimension;
-import java.awt.Window;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-public class Eat {
-	public static final int WIDTH = 1920;
-	public static final int HEIGHT = 1000;
+public class Eat extends Applet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5739980427553102257L;
 	JFrame window;
 	GamePanel panel;
-	
+	public static int WIDTH;
+	public static int HEIGHT;
 	public static void main(String[] args) {
 		Eat game = new Eat();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		WIDTH = (int) screenSize.getWidth();
+		HEIGHT = (int) screenSize.getHeight();
 		game.setup();
+		
 	}
 	
 	public Eat() {
@@ -24,9 +32,12 @@ public class Eat {
 	public void setup() {
 		window.add(panel);
 		window.addKeyListener(panel);
-		window.setSize(WIDTH, HEIGHT);
+		/*window.getMaximizedBounds();
+		final int WIDTH = window.getMaximizedBounds().width;
+		final int HEIGHT = window.getMaximizedBounds().height;*/
+		window.setSize(WIDTH,HEIGHT);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		window .getContentPane().setPreferredSize(new Dimension(WIDTH,HEIGHT));
         window.pack();
 		window.setVisible(true);
 		panel.startGame();

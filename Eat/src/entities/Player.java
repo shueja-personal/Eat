@@ -3,12 +3,8 @@ package entities;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Panel;
-import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
 
 import control.Eat;
-import control.GamePanel;
 
 // The Player class for Eat. 
 public class Player extends GameObject {
