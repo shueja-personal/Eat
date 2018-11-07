@@ -92,8 +92,9 @@ public class ObjectManager {
 		for(Base base : BaseList) {
 				if (base.ownPlayer.collisionBox.intersects(base.collisionBox)) {
 					if(base.ownPlayer.heldFood > 0) {
-						base.ownPlayer.heldFood--;
-						base.deliveredFood += 1;
+						int foodDeliveredPerFrame = (int) (base.ownPlayer.heldFood / 1000)+1;
+						base.ownPlayer.heldFood-= foodDeliveredPerFrame;
+						base.deliveredFood += foodDeliveredPerFrame;
 					}
 				}
 				if (base.deliveredFood >= pointsToWin) {
